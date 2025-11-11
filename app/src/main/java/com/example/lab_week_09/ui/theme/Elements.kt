@@ -1,5 +1,6 @@
 package com.example.lab_week_09.ui.theme
 
+import android.R.attr.onClick
 import androidx.compose.foundation.layout.padding
 import androidx.compose.material3.Button
 import androidx.compose.material3.ButtonDefaults
@@ -36,17 +37,19 @@ import androidx.compose.ui.unit.dp
     }
     //UI Element for displaying a button
     @Composable
-    fun PrimaryTextButton(text: String, onClick: () -> Unit) {
+    fun PrimaryTextButton(text: String, enabled: Boolean = true, onClick: () -> Unit) {
         TextButton(text = text,
             textColor = Color.White,
+            enabled = enabled,
             onClick = onClick
         )
     }
     //Here, we use the labelMedium style from the typography
     @Composable
-    fun TextButton(text: String, textColor: Color, onClick: () -> Unit) {
+    fun TextButton(text: String, textColor: Color, enabled: Boolean = true, onClick: () -> Unit) {
         Button(
             onClick = onClick,
+            enabled = enabled,
             modifier = Modifier.padding(8.dp),
             colors = ButtonDefaults
                 .buttonColors(
