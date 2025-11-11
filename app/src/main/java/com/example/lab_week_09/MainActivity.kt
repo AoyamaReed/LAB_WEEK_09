@@ -1,5 +1,6 @@
 package com.example.lab_week_09
 
+import android.R.attr.bottom
 import android.R.attr.button
 import android.R.id.input
 import android.os.Bundle
@@ -31,6 +32,9 @@ import androidx.compose.runtime.mutableStateListOf
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.snapshots.SnapshotStateList
+import com.example.lab_week_09.ui.theme.OnBackgroundItemText
+import com.example.lab_week_09.ui.theme.OnBackgroundTitleText
+import com.example.lab_week_09.ui.theme.PrimaryTextButton
 
 class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -108,12 +112,15 @@ fun HomeContent(
 //to add padding horizontally and vertically
 //or Modifier.padding(start = 16.dp, top = 8.dp, end = 16.dp, bottom = 8.dp)
 //to add padding to each side
-            modifier = Modifier.padding(16.dp).fillMaxSize(),
+            modifier = Modifier
+                .padding(16.dp)
+                .fillMaxSize(),
 //Alignment.CenterHorizontally is used to align the Column horizontally
 //You can also use verticalArrangement = Arrangement.Center to align the Column vertically
-            horizontalAlignment = Alignment.CenterHorizontally
+                    horizontalAlignment = Alignment.CenterHorizontally
             ) {
-            Text(text = stringResource(
+//Here, we call the OnBackgroundTitleText UI Element
+            OnBackgroundTitleText(text = stringResource(
                 id = R.string.enter_item)
             )
 //Here, we use TextField to display a text input field
@@ -128,25 +135,17 @@ fun HomeContent(
                 onValueChange = {
 //Here, we call the onInputValueChange lambda function
 //and pass the value of the input field as a parameter
-//This is so that we can update the value of the
-                    inputField
+//This is so that we can update the value of the inputField
                     onInputValueChange(it)
                 }
             )
-//Here, we use Button to display a button
-//the onClick parameter is used to set what happens when the button is clicked
-            Button(onClick = {
-//Here, we call the onButtonClick lambda function
-//This is so that we can add the inputField value to the listData
-//and reset the value of the inputField
+//Here, we call the PrimaryTextButton UI Element
+            PrimaryTextButton(text = stringResource(
+                id = R.string.button_click)
+            ) {
                 onButtonClick()
-            }) {
-//Set the text of the button
-                    Text(text = stringResource(
-                        id = R.string.button_click)
-                    )
-                }
             }
+        }
         }
 //Here, we use items to display a list of items inside the LazyColumn
 //This is the RecyclerView replacement
@@ -156,6 +155,8 @@ fun HomeContent(
                 modifier = Modifier.padding(vertical = 4.dp).fillMaxSize(),
                 horizontalAlignment = Alignment.CenterHorizontally
             ) {
+                //Here, we call the OnBackgroundItemText UI Element
+                OnBackgroundItemText(text = item.name)
                 Text(text = item.name)
             }
         }
